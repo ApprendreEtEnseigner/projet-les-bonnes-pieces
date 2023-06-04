@@ -2,10 +2,18 @@
 //! Ces lignes de code sont écrites en JavaScript et utilisent l'API Fetch pour récupérer un fichier JSON, puis écrire son contenu sur la page HTML.
 
 // *const reponse = await fetch("pieces-auto.json"); envoie une requête à l'URL spécifiée pour récupérer le fichier JSON. La réponse est stockée dans la constante reponse.La réponse est retournée sous forme de promesse et le mot-clé "await" est utilisé pour attendre la résolution de la promesse avant de continuer l'exécution du code.
-const reponse = await fetch("pieces-auto.json");
+const reponse = await fetch('pieces-auto.json');
 
 // *const pieces = await reponse.json(); convertit la réponse JSON en un objet JavaScript. Le contenu JSON est extrait de la réponse et stocké dans la constante pieces.Une fois que la réponse est résolue, la méthode "json()" est appelée sur l'objet réponse, ce qui renvoie une autre promesse qui est résolue avec les données JSON parsées. Le mot-clé "await" est à nouveau utilisé pour attendre la résolution de cette promesse.
 const pieces = await reponse.json();
+
+try {
+    var object = JSON.parse(response);
+    // JSON valide
+  } catch (error) {
+    // JSON invalide
+    console.log("Invalid JSON string");
+  }
 
 //* Enfin, le tableau "pieces" est créé à partir des données JSON récupérées, et la première pièce dans le tableau est stockée dans la variable "article".
 const article = pieces[0];
@@ -47,3 +55,9 @@ prixElement.innerText = `prix: &{article.prix} €`;
 
 const categorieElement = document.createElement("p");
 categorieElement.innerText = article.categorie;
+
+const sectionFiches = document.querySelector('.fiches');
+sectionFiches.appendChild(imageElement);
+sectionFiches.appendChild(nomElement);
+sectionFiches.appendChild(prixElement);
+sectionFiches.appendChild(categorieElement);
